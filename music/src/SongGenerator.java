@@ -56,6 +56,6 @@ public class SongGenerator {
     }
 
     public static void main(String[] args) {
-        generateSong(100, "output.mid"); // Generate a song with 10 notes and save it as "output.mid"
+        generateSong(10, "output.mid"); // Generate a song with 10 notes and save it as "output.mid"
     }
 }
