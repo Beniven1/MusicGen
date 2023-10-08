@@ -8,10 +8,23 @@ public class SongGenerator {
     private static final int DEFAULT_TEMPO = 120;
     private static final int TICKS_PER_BEAT = 120;
 
+    public static final int PIANO = 0;
+    private static final int GUITAR = 25;
+
+    public static final int FLUTE = 73;
+
+
     public static void generateSong(int length, String outputFilePath) {
         try {
+            // Create sequence and track
             Sequence sequence = new Sequence(Sequence.PPQ, TICKS_PER_BEAT);
             Track track = sequence.createTrack();
+
+            // Set instrument
+            ShortMessage programChange = new ShortMessage();
+            //replace PIANO, with one of the above instruments in the psf int, or add your own.
+            programChange.setMessage(ShortMessage.PROGRAM_CHANGE, 0, PIANO, 0);
+            track.add(new MidiEvent(programChange, 0));
 
             int previousNote = 60; // Starting note
 
@@ -56,6 +69,6 @@ public class SongGenerator {
     }
 
     public static void main(String[] args) {
-        generateSong(10, "output.mid"); // Generate a song with 10 notes and save it as "output.mid"
+        generateSong(10, "output.mid"); // Generate a song with 10 notes and save it as "output.mid" if you go too high it may not work.
     }
 }
